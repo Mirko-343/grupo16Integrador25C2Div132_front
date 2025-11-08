@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/bamboo.css" type="text/css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="JS/crear.js" defer></script>
+    <title>Crear</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <a href="index.html">
+                    <li>Ver</li>
+                </a>
+                <a href="consultar.html">
+                    <li>Consultar id</li>
+                </a>
+                <a href="crear.html">
+                    <li>Crear</li>
+                </a>
+                <a href="modificar.html">
+                    <li>Modificar</li>
+                </a>
+                <a href="eliminar.html">
+                    <li>Eliminar</li>
+                </a>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Crear producto</h1>
+
+        <!-- A menos que enviemos este formulario con el envío nativo de formulario HTML, no es necesario poner action-->
+        <form id="alta-products-form">
+            <label for="nombreProd">Nombre</label>
+            <input type="text" name="nombre" id="nombreProd" required>
+
+            <label for="imgProd">Imagen</label>
+            <input type="text" name="img" id="imgProd" required>
+
+            <label for="tipoProd">Tipo</label>
+            <select name="tipo" id="tipoProd" required>
+                <option value="CASCO">casco</option>
+                <option value="REMERA">remera</option>
+            </select>
+
+            <label for="precioProd">Precio</label>
+            <input type="number" name="precio" step="any" id="precioProd" required>
+
+            <input type="submit" value="Crear Producto">
+        </form>
+
+        <hr>
+        <div id="contenedor-productos"></div>
+    </main>
+</body>
+</html>
