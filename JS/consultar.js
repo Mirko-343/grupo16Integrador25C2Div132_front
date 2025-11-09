@@ -36,7 +36,7 @@ function mostrarProducto(producto){
     let htmlProducto = `
                     <li class="li-listados">
                     <img src="${producto.IMG_URL}" alt="${producto.NOMBRE}" class="img-li-listados">
-                    <p>ID: ${producto.ID}/ Nombre: ${producto.NOMBRE} / <strong>Precio: $${producto.PRECIO}</strong></p>
+                    <p>ID: ${producto.ID} / Nombre: ${producto.NOMBRE} / Precio: $${producto.PRECIO}</p>
                     </li>
                 `
 

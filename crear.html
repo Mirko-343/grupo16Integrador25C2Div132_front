@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/bamboo.css" type="text/css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/crear.css">
     <script src="JS/crear.js" defer></script>
     <title>Crear</title>
 </head>
@@ -33,10 +32,10 @@
     </header>
 
     <main>
-        <h1>Crear producto</h1>
+        <h1>Cargar producto</h1>
 
         <!-- A menos que enviemos este formulario con el envío nativo de formulario HTML, no es necesario poner action-->
-        <form id="alta-products-form">
+        <form id="alta-products-form" class="alta-products-form">
             <label for="nombreProd">Nombre</label>
             <input type="text" name="nombre" id="nombreProd" required>
 
@@ -45,14 +44,14 @@
 
             <label for="tipoProd">Tipo</label>
             <select name="tipo" id="tipoProd" required>
-                <option value="CASCO">casco</option>
-                <option value="REMERA">remera</option>
+                <option value="CASCO">Casco</option>
+                <option value="REMERA">Remera</option>
             </select>
 
             <label for="precioProd">Precio</label>
             <input type="number" name="precio" step="any" id="precioProd" required>
 
-            <input type="submit" value="Crear Producto">
+            <input type="submit" value="Cargar Producto" class="submit-button">
         </form>
 
         <hr>
