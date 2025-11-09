@@ -2,9 +2,9 @@
 const url = "http://localhost:3000/products"
 
 let catalogo = document.querySelector("#catalogo");
+let barraBusqueda = document.querySelector("#barra-busqueda");
 
-
-
+barraBusqueda.addEventListener("keyup", filtrarProductos);
 
 /* ============================= Funciones ============================= */
 // Consumir JSON para los productos.
