@@ -8,27 +8,35 @@ barraBusqueda.addEventListener("keyup", filtrarProductos);
 
 /* ============================= Funciones ============================= */
 // Consumir JSON para los productos.
-async function obtenerDatos(){ // Las funciones async siempre devuelven una promesa, independientemente del valor de lo que retorna.
+async function obtenerDatos(filtrar){ // Las funciones async siempre devuelven una promesa, independientemente del valor de lo que retorna.
 
     try {
         let respuesta = await fetch(url); // Hacemos una peticion a nuestro nuevo endpoint en http://localhost:3000/products
 
         let data = await respuesta.json();
 
-        console.log(data); // Nuestros productos estan disponibles dentro de payload { payload: Array(19) }
+        let productos = data.payload; // Nuestros productos estan disponibles dentro de payload { payload: Array(19) }
 
-        let productos = data.payload;
+        if(filtrar){
+            let productosFiltrados = productos.filter((producto) => producto.NOMBRE.toLowerCase().includes(barraBusqueda.value.toLowerCase()));
+            return productosFiltrados;
+        }else{
+            mostrarProductos(productos);
+        }
 
-        mostrarProductos(productos);
     } catch(error) {
             console.error(error);
     }
 }
 
+async function filtrarProductos(){
+    let productosFiltrados = await obtenerDatos(true);
+    mostrarProductos(productosFiltrados);
+}
 
 function mostrarProductos(arrayProductos){
     
-    console.table(arrayProductos); // Recibimos correctamente en formato tabla los productos que nos manda la funcion obtenerProductos()
+    //console.table(arrayProductos); // Recibimos correctamente en formato tabla los productos que nos manda la funcion obtenerProductos()
     let htmlProducto = "";
     arrayProductos.forEach(producto => {
         htmlProducto += `
@@ -46,7 +54,7 @@ function mostrarProductos(arrayProductos){
 
 
 function init(){
-    obtenerDatos();
+    obtenerDatos(false);
 }
 
 
