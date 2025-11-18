@@ -16,9 +16,8 @@ getProductsForm.addEventListener("submit", async(event) =>{ // Obtener datos car
     console.log("ID consultado: ", idProducto);
 
     try{
-        let url = `http://localhost:3000/products/${idProducto}` // URL a la que voy a hacer el fetch para enviar la request
 
-        let response = await fetch(url); // Petición get a la url. fetch por defecto utiliza el método get.
+        let response = await fetch(`http://localhost:3000/api/products/${idProducto}`); // Petición get a la url. fetch por defecto utiliza el método get.
 
         let datos = await response.json();
 

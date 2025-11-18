@@ -1,5 +1,5 @@
 /* ============================= Varibales ============================= */
-const url = "http://localhost:3000/products"
+const url = "http://localhost:3000/api/products";
 
 let catalogo = document.querySelector("#catalogo");
 let barraBusqueda = document.querySelector("#barra-busqueda");

@@ -1,6 +1,6 @@
 /* ============================= Varibales ============================= */
 let altaProductsForm = document.getElementById("alta-products-form");
-let url = "http://localhost:3000/products";
+let url = "http://localhost:3000/api/products";
 
 
 
