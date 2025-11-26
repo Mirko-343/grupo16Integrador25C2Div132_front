@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/login.css">
+    <script src="JS/login.js" defer></script>
     <title>Login</title>
 </head>
 <body>
 
     <main>
-        <div class="login-img-container">
-            <img src="IMG/f1store-1 (1) (1).jpg">
-        </div>
 
-        <h1>Admin Login</h1>
+        <!-- <div class="login-img-container">
+            <img src="IMG/f1storeLogo.jpg">
+        </div> -->
+
+        <div class="main-title-container">
+            <h1>Welcome to <span class="f1-title">F1</span> Store</h1>
+        </div>
+        <h2>Ingrese su nombre por favor</h2>
 
         <div class="login-form-container">
             <form id="login-form" class="login-form">
-                <label for="mail">Correo electrónico</label>
-                <input type="text" id="mail">
+                <input type="text" id="nombreUsuario" name="nombreUsuario" required>
 
-                <label for="password">Contraseña</label>
-                <input type="text" id="password">
+                <input type="submit" value="Continuar">
             </form>
         </div>
     </main>

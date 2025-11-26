@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <script src="js/main.js" defer></script>
+    <link rel="icon" href="IMG/favicon.png">
+    <title>F1 Store</title>
+</head>
+<body>
+    
+    <div class="top-bar">
+        <div class="contenedor-nombre">
+            <p><strong>Mirko Becker</strong></p>
+        </div>
+    </div>
+
+    <header>  
+        <div class="header-img-container">
+            <img src="IMG/f1storeLogo.jpg" id="header-img" alt="Inicio">
+        </div>
+        
+        <input id="barra-busqueda" class="barra-busqueda" type="text" placeholder="¿Qué estás buscando?">
+
+        <div class="header-cart-container" id="header-cart-container">
+            <img src="IMG/headerCartIcon.png" alt="Carrito de Compras" class="header-cart-icon" id="header-cart-icon">
+            <p id="contador-carrito" class="contador-carrito"></p>
+        </div>
+    </header>
+
+    <section class="filtros">
+        
+        <div class="filtro-equipos-contenedor">
+            <div class="filtro-equipos-carrusel">
+                <ul>
+                    <li><img src="img/ferrari_icon.jpg" alt="ferrari_icon" class="carrusel-equipos-icon" id="icon-ferrari"></li>
+                    <li><img src="img/alpine_icon.jpg" alt="alpine_icon" class="carrusel-equipos-icon" id="icon-apline"></li>
+                    <li><img src="img/mercedes_icon.jpg" alt="mercedes_icon" class="carrusel-equipos-icon" id="icon-mercedes"></li>
+                    <li><img src="img/rb_icon.jpg" alt="rb_icon" class="carrusel-equipos-icon" id="icon-rb"></li>
+                    <li><img src="img/asmartin_icono.jpg" alt="asmartin_icono" class="carrusel-equipos-icon" id="icon-asmartin"></li>
+                    <li><img src="img/haas_icon.jpg" alt="haas_icon" class="carrusel-equipos-icon" id="icon-haas"></li>
+                    <li><img src="img/kick_icon.jpg" alt="kick_icon" class="carrusel-equipos-icon" id="icon-kick"></li>
+                    <li><img src="img/williams_icon.jpg" alt="williams_icon" class="carrusel-equipos-icon" id="icon-williams"></li>
+                    <li><img src="img/rbcash_icon.jpg" alt="rbcash_icon" class="carrusel-equipos-icon" id="icon-rbcash"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="filtro-categorias-contenedor">
+            <button class="filter-button" id="filter-button-casco">Cascos</button>
+            <button class="filter-button" id="filter-button-remera">Remeras</button>
+        </div>
+    </section>
+
+    <section class="catalogo" id="catalogo">
+
+    </section>
+
+</body>
+</html>

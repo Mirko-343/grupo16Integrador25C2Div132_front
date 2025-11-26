@@ -1,0 +1,9 @@
+.carrito-footer{
+    display: flex;
+    align-items: center;
+}
+
+.carrito-footer p{
+    margin-right: 500px;
+    margin-left: 20px;
+}

@@ -1,9 +1,16 @@
 /* ============================= Varibales ============================= */
 const url = "http://localhost:3000/api/products";
 
+
 let catalogo = document.querySelector("#catalogo");
 let barraBusqueda = document.querySelector("#barra-busqueda");
+let headerImg = document.querySelector("#header-img");
+let contadorCarrito = document.querySelector("#contador-carrito");
+let headerCart = document.querySelector("#header-cart-icon")
+let filterCasco = document.querySelector("#filter-button-casco");
+let filterRemera = document.querySelector("#filter-button-remera");
 
+// Carrusel equipos ---------- ----------
 let ferrariIcon = document.querySelector("#icon-ferrari");
 let aplineIcon = document.querySelector("#icon-apline");
 let mercedesIcon = document.querySelector("#icon-mercedes");
@@ -14,12 +21,6 @@ let kickIcon = document.querySelector("#icon-kick");
 let williamsIcon = document.querySelector("#icon-williams");
 let rbcashIcon = document.querySelector("#icon-rbcash");
 
-let headerImg = document.querySelector("#header-img");
-
-
-
-barraBusqueda.addEventListener("keyup", filtrarProductos);
-
 ferrariIcon.addEventListener("click", () => filtrarProductosPorEquipo("Ferrari"));
 aplineIcon.addEventListener("click", () => filtrarProductosPorEquipo("Alpine"));
 mercedesIcon.addEventListener("click", () => filtrarProductosPorEquipo("Mercedes"));
@@ -29,12 +30,29 @@ haasIcon.addEventListener("click", () => filtrarProductosPorEquipo("Haas"));
 kickIcon.addEventListener("click", () => filtrarProductosPorEquipo("Sauber"));
 williamsIcon.addEventListener("click", () => filtrarProductosPorEquipo("Williams"));
 rbcashIcon.addEventListener("click", () => filtrarProductosPorEquipo("VCARB"));
+// ---------- ---------- ---------- ----------
 
+// Session Storage
+if(sessionStorage.getItem("userData")){ // User data
+    let userData = JSON.parse(sessionStorage.getItem("userData"));
+    console.log(userData.nombreUsuario);
+}
+if(sessionStorage.getItem("carrito")){
+    actualizarCarritoIcon();
+}
+
+
+
+barraBusqueda.addEventListener("keyup", filtrarProductos);
 headerImg.addEventListener("click", obtenerDatos);
+headerCart.addEventListener("click", () => window.location = "carrito.html");
+filterCasco.addEventListener("click", () => filtrarProductosPorCategoria("CASCO"));
+filterRemera.addEventListener("click", () => filtrarProductosPorCategoria("REMERA"));
+
 
 /* ============================= Funciones ============================= */
 // Consumir JSON para los productos.
-async function obtenerDatos(filtrar, equipo){ // Las funciones async siempre devuelven una promesa, independientemente del valor de lo que retorna.
+async function obtenerDatos(filtrar, equipo, categoria){ // Las funciones async siempre devuelven una promesa, independientemente del valor de lo que retorna.
 
     try {
         let respuesta = await fetch(url); // Hacemos una peticion a nuestro nuevo endpoint en http://localhost:3000/products
@@ -43,11 +61,14 @@ async function obtenerDatos(filtrar, equipo){ // Las funciones async siempre dev
 
         let productos = data.payload; // Nuestros productos estan disponibles dentro de payload { payload: Array(19) }
 
-        if(filtrar && equipo === null){
+        if(filtrar && equipo === null && categoria === null){
             let productosFiltrados = productos.filter((producto) => producto.NOMBRE.toLowerCase().includes(barraBusqueda.value.toLowerCase()));
             return productosFiltrados;
         }else if(filtrar && equipo){
             let productosFiltrados = productos.filter((producto) => producto.NOMBRE.toLowerCase().includes(equipo.toLowerCase()));
+            return productosFiltrados;
+        }else if(filtrar && categoria){
+            let productosFiltrados = productos.filter((producto) => producto.TIPO.toLowerCase() === categoria.toLowerCase());
             return productosFiltrados;
         }else{
             mostrarProductos(productos);
@@ -58,14 +79,20 @@ async function obtenerDatos(filtrar, equipo){ // Las funciones async siempre dev
     }
 }
 
+async function filtrarProductosPorCategoria(categoria){
+    console.log(categoria);
+    let productosFiltrados = await obtenerDatos(true, null, categoria);
+    mostrarProductos(productosFiltrados);
+}
+
 async function filtrarProductosPorEquipo(equipo){
     console.log(equipo);
-    let productosFiltrados = await obtenerDatos(true, equipo);
-    mostrarProductos(productosFiltrados, null);
+    let productosFiltrados = await obtenerDatos(true, equipo, null);
+    mostrarProductos(productosFiltrados);
 }
 
 async function filtrarProductos(){  
-    let productosFiltrados = await obtenerDatos(true, null);
+    let productosFiltrados = await obtenerDatos(true, null, null);
     mostrarProductos(productosFiltrados);
 }
 
@@ -79,19 +106,101 @@ function mostrarProductos(arrayProductos){
                 <img src="${producto.IMG_URL}" alt="${producto.NOMBRE}">
                 <h5>${producto.NOMBRE}</h5>
                 <div class = "product-data-container"> 
-                    <p>Id: ${producto.ID}</p>
                     <p><strong>$${producto.PRECIO}</strong></p>
-                    <div class="cart-img-container">
-                        <img src="./IMG/cart_icon.jpg">
+                    <div class="cart-container">
+                        <div class="cart-controllers">
+                            <button onclick='agregarProductoCarrito("${producto.IMG_URL}", "${producto.NOMBRE}", ${producto.ID}, ${producto.PRECIO})'> + </button>
+                            <button onclick='eliminarProductoCarrito(${producto.ID})'> - </button>
+                        </div>
+                        <button id="cart-button">
+                            <img src="./IMG/cart_icon.jpg" id="carrito-icon">
+                        </button>
+                        <p id="product-counter-${producto.ID}">${obtenerCantidadProducto(producto.ID) != 0 ?  obtenerCantidadProducto(producto.ID) : ""}</p>
                     </div>
                 </div>
             </div>
         `;
     });
-
+       
     catalogo.innerHTML = htmlProducto;
 }
 
+function agregarProductoCarrito(imgProducto, nombreProducto, idProducto, precioProducto){
+    let nuevoProducto = {
+        id : idProducto,
+        nombre : nombreProducto,
+        img_url : imgProducto,
+        precio : precioProducto
+    }
+
+    let carritoActual = sessionStorage.getItem("carrito");
+
+    if(carritoActual){
+        let carrito = JSON.parse(carritoActual);
+        carrito.push(nuevoProducto);
+        actualizarSSCarrito(carrito);
+    }else{
+        let arrayCarrito = [nuevoProducto];
+        actualizarSSCarrito(arrayCarrito);
+    }
+    actualizarCarritoIcon();
+    actualizarContadorProducto(idProducto);
+}
+
+function eliminarProductoCarrito(idProducto){
+    let carritoActual = sessionStorage.getItem("carrito");
+    if(carritoActual){
+        let carrito = JSON.parse(carritoActual);
+        let indice = carrito.findIndex(producto => producto.id === idProducto);
+        console.log(indice);
+        if(indice != -1){
+            carrito.splice(indice, 1);
+        }
+        actualizarSSCarrito(carrito);
+        actualizarCarritoIcon();
+        actualizarContadorProducto(idProducto);
+    }
+}
+
+function actualizarCarritoIcon(){
+    let arr = JSON.parse(sessionStorage.getItem("carrito"));
+    if(arr.length != 0){
+        contadorCarrito.innerHTML = `${arr.length}`;
+        document.getElementById("contador-carrito").style.backgroundColor = "#e00700";
+    }else{
+        contadorCarrito.innerHTML = "";
+        document.getElementById("contador-carrito").style.backgroundColor = "white";
+    }
+}
+
+function actualizarContadorProducto(idProducto){
+    let productCounter = document.querySelector(`#product-counter-${idProducto}`);
+    if(obtenerCantidadProducto(idProducto) === 0){
+        productCounter.innerHTML = "";
+    }else{
+        productCounter.innerHTML = obtenerCantidadProducto(idProducto);
+    }
+}
+
+function actualizarSSCarrito(arrayCarrito){
+    let jsonCarrito = JSON.stringify(arrayCarrito);
+    sessionStorage.setItem("carrito", jsonCarrito);
+}
+
+function obtenerCantidadProducto(idProducto){
+    if(sessionStorage.getItem("carrito")){
+        let carrito = JSON.parse(sessionStorage.getItem("carrito"));
+        let contador = 0;
+        carrito.forEach(producto => {
+            if(producto.id === idProducto){
+                contador++;
+            }
+        })
+        return contador;
+    }else{
+        return 0;
+    }
+}
 
 function init(){
     obtenerDatos(false);

@@ -1,4 +1,35 @@
+@font-face {
+  font-family: "Formula1";
+  src: url("../fonts/formula1-regular_web_0-webfont.woff2") format("woff2"),
+       url("../fonts/formula1-regular_web_0-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Formula1";
+  src: url("../fonts/formula1-bold_web_0-webfont.woff2") format("woff2"),
+       url("../fonts/formula1-bold_web_0-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body{
+    background-image: url("../IMG/loginBackground2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 /* ================= MAIN ================= */
+.main-title-container{
+    width: 50vw;
+    text-align: left;
+}
+
 main{
     display: flex;
     flex-direction: column;
@@ -8,9 +39,21 @@ main{
 }
 
 main h1{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Formula1", sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 115px;
 }
 
+.f1-title{
+    color: red;
+}
+
+main h2{
+    font-family: "Formula1", sans-serif;
+    font-weight: 500;
+    color: white;
+}
 /* ================= FORM ================= */
 .login-form-container{
     display: flex;
@@ -26,6 +69,3 @@ main h1{
     align-items: center;
 }
 
-.login-form label{
-    margin-top: 8%;
-}
