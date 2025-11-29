@@ -152,7 +152,6 @@ function eliminarProductoCarrito(idProducto){
     if(carritoActual){
         let carrito = JSON.parse(carritoActual);
         let indice = carrito.findIndex(producto => producto.id === idProducto);
-        console.log(indice);
         if(indice != -1){
             carrito.splice(indice, 1);
         }
@@ -213,13 +212,3 @@ function init(){
 init();
 
 
-
-
-/* Ciclo de ejecución explicado 
-    1. Se llama a init() > esta función llama a la función cargarDatos() 
-    2. cargarDatos() En la línea 13 guarda en la variable dataArray el retorno de la función obtenerDatos(), se usa await porque tiene que esperar a que la función obtenerDatos() termine 
-    de ejecutar todo lo que tiene dentro y como es una función asíncrona no se hace en el momento, por eso se espera.
-        2.1. Dentro de la función obtenerDatos() se consume la información de la URL que le pasé a fetch. 
-        2.2. Después se transforma ese JSON en un array de objetos JavaScript. Se usa await porque tengo que esperar a que termine de consumirse lo que tiene la URL 
-    3. Una vez que finalizó la ejecución de obtenerDatos() y ya tengo el retorno (array de objetos JS) guardado en una variable, le paso dicho array a la función mostrarCatalogo()
-    4. mostrarCatalogo() carga el HTML con la información de los productos. */

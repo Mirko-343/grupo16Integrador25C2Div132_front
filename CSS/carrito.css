@@ -7,3 +7,13 @@
     margin-right: 500px;
     margin-left: 20px;
 }
+
+.cart-img{
+    width: 70px;
+    height: auto;
+}
+
+.cart-list li{
+    display: flex;
+    align-items: center;
+}
