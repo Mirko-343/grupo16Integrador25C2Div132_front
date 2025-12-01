@@ -7,6 +7,8 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+
+
 /* ================= HEADER ================= */
 header{
     display: flex;
@@ -16,43 +18,14 @@ header{
     position: relative;
 }
 
-nav{
-    display: flex;
-    align-items: center;
-}
-
-nav ul{
-    display: flex;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-}
-
-nav ul li{
-    list-style: none;
-    padding: 5px;
-    
-}
-
-nav ul a{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-    text-decoration: none;
-    color: black;
-    text-align: center;
-}
-
-nav ul a:hover{
-    color: red;
+#header-img{
+    cursor: pointer;
 }
 
 .barra-busqueda{
     border-radius: 15px;
     text-align: center;
     border-style: solid;
-}
-
-#header-img{
-    cursor: pointer;
 }
 
 .header-cart-container{
@@ -82,15 +55,43 @@ nav ul a:hover{
     align-items: center;
     padding: 3%;
 }
+
+/* nav{
+    display: flex;
+    align-items: center;
+}
+
+nav ul{
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+nav ul li{
+    list-style: none;
+    padding: 5px;
+    
+}
+
+nav ul a{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+nav ul a:hover{
+    color: red;
+} */
+
+
+
 /* ================= FILTROS ================= */
 .filtros{
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-
-.filtro-categorias-contenedor{
-    
 }
 
 .filter-button{
@@ -105,6 +106,8 @@ nav ul a:hover{
     background-color: black;
     color: white;
 }
+
+
 
 /* ================= CARRUSEL EQUIPOS ================= */
 .filtro-equipos-contenedor{
@@ -140,7 +143,6 @@ nav ul a:hover{
 }
 
 /* ================= CATALOGO ================= */
-
 .catalogo{
     display: flex;
     flex-wrap: wrap;
@@ -151,7 +153,6 @@ nav ul a:hover{
     padding: 0.5%;
     width: 260px;
     box-shadow: 0px 0px 4px grey;
-    /* border: solid 2px; */
     border-radius: 3px;
     margin: 1%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -160,45 +161,28 @@ nav ul a:hover{
     justify-content: space-between;
 }
 
+.card-producto img{
+    width: 250px;
+    height: auto;
+}
+
 .card-producto h5{
     font-size: large;
     word-wrap: break-word; /* Esto solo sirve si el contenedor tiene un ancho definido */
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .product-data-container{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-.card-producto p{
+.product-data-container p{
     font-size: larger;
     margin: 0;
     display: inline-block;
-}
-
-.card-producto img{
-    width: 250px;
-    height: auto;
-}
-
-.cart-container{
-    display: flex;
-    width: 50%;
-    justify-content: right;
-    align-items: center;
-}
-
-.cart-container img{
-    width: 50px;
-    height: auto;
-}
-
-#cart-button{
-    all: unset;
-    border-radius: 50%;
-    width: 40%;
 }
 
 .cart-controllers{
@@ -206,4 +190,30 @@ nav ul a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.cart-controllers-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.cart-controllers-buttons button{
+    border-radius: 50%;
+    /*margin-right: 15px;*/
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-style: none;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+}
+
+.cart-controllers-buttons button:hover{
+    cursor: pointer;
+    background-color: red;
+    color: white;
 }

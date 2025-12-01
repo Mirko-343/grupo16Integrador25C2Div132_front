@@ -15,7 +15,7 @@ function mostrarCarrito(cantidades){
             htmlProducto += `
                 <li class="cart-list-item"> 
                     Nombre: ${producto.nombre} || Precio : ${producto.precio} || ${cantidad}
-                    <img class="cart-img" src=${producto.img_url}>
+                    <img class="cart-img" src="http://localhost:3000/${producto.img_url}">
                     <button onclick='agregarProductoCarrito("${producto.img_url}", "${producto.nombre}", ${producto.id}, ${producto.precio})'> + </button>
                     <button onclick='eliminarProductoCarrito(${producto.id})'> - </button>
                 </li>

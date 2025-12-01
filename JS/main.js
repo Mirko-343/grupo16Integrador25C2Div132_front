@@ -101,21 +101,19 @@ function mostrarProductos(arrayProductos){
     //console.table(arrayProductos); // Recibimos correctamente en formato tabla los productos que nos manda la funcion obtenerProductos()
     let htmlProducto = "";
     arrayProductos.forEach(producto => {
+        console.log(producto.IMG_URL);
         htmlProducto += `
             <div class="card-producto">
-                <img src="${producto.IMG_URL}" alt="${producto.NOMBRE}">
+                <img src="http://localhost:3000/${producto.IMG_URL}" alt="${producto.NOMBRE}">
                 <h5>${producto.NOMBRE}</h5>
                 <div class = "product-data-container"> 
                     <p><strong>$${producto.PRECIO}</strong></p>
-                    <div class="cart-container">
-                        <div class="cart-controllers">
+                    <div class="cart-controllers">
+                        <div class="cart-controllers-buttons"> 
                             <button onclick='agregarProductoCarrito("${producto.IMG_URL}", "${producto.NOMBRE}", ${producto.ID}, ${producto.PRECIO})'> + </button>
                             <button onclick='eliminarProductoCarrito(${producto.ID})'> - </button>
                         </div>
-                        <button id="cart-button">
-                            <img src="./IMG/cart_icon.jpg" id="carrito-icon">
-                        </button>
-                        <p id="product-counter-${producto.ID}">${obtenerCantidadProducto(producto.ID) != 0 ?  obtenerCantidadProducto(producto.ID) : ""}</p>
+                        <p id="product-counter-${producto.ID}" class="product-counter">${obtenerCantidadProducto(producto.ID) != 0 ?  obtenerCantidadProducto(producto.ID) : ""}</p>
                     </div>
                 </div>
             </div>
