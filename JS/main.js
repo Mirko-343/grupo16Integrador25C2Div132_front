@@ -16,8 +16,9 @@ let aplineIcon = document.querySelector("#icon-apline");
 let mercedesIcon = document.querySelector("#icon-mercedes");
 let rbIcon = document.querySelector("#icon-rb");
 let asmartinIcon = document.querySelector("#icon-asmartin");
-let haasIcon = document.querySelector("#icon-haas");
 let kickIcon = document.querySelector("#icon-kick");
+let haasIcon = document.querySelector("#icon-mclaren");
+let mclarenIconIcon = document.querySelector("#icon-mclaren");
 let williamsIcon = document.querySelector("#icon-williams");
 let rbcashIcon = document.querySelector("#icon-rbcash");
 
@@ -27,6 +28,7 @@ mercedesIcon.addEventListener("click", () => filtrarProductosPorEquipo("Mercedes
 rbIcon.addEventListener("click", () => filtrarProductosPorEquipo("Red Bull"));
 asmartinIcon.addEventListener("click", () => filtrarProductosPorEquipo("Aston Martin"));
 haasIcon.addEventListener("click", () => filtrarProductosPorEquipo("Haas"));
+mclarenIconIcon.addEventListener("click", () => filtrarProductosPorEquipo("Mclaren"));
 kickIcon.addEventListener("click", () => filtrarProductosPorEquipo("Sauber"));
 williamsIcon.addEventListener("click", () => filtrarProductosPorEquipo("Williams"));
 rbcashIcon.addEventListener("click", () => filtrarProductosPorEquipo("VCARB"));
@@ -36,6 +38,8 @@ rbcashIcon.addEventListener("click", () => filtrarProductosPorEquipo("VCARB"));
 if(sessionStorage.getItem("userData")){ // User data
     let userData = JSON.parse(sessionStorage.getItem("userData"));
     console.log(userData.nombreUsuario);
+}else{
+    window.location = "login.html";
 }
 if(sessionStorage.getItem("carrito")){
     actualizarCarritoIcon();
