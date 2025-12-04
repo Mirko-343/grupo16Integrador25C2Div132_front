@@ -52,6 +52,7 @@ function mostrarCarrito(cantidades){
 
     }else{
         carritoContainer.innerHTML = "";
+        ticketPrice.innerHTML = `<h2 id="ticket-price">Total: $0</h2>`
     }
 }
 
