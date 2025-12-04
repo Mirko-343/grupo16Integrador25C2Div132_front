@@ -24,10 +24,13 @@ body{
     background-size: cover;
 }
 
+
+
 /* ================= MAIN ================= */
 .main-title-container{
     width: 50vw;
     text-align: left;
+    text-wrap: wrap;
 }
 
 main{
@@ -54,6 +57,9 @@ main h2{
     font-weight: 500;
     color: white;
 }
+
+
+
 /* ================= FORM ================= */
 .login-form-container{
     display: flex;

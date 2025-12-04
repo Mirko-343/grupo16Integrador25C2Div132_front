@@ -53,7 +53,7 @@ header{
 }
 
 .header-cart-icon{
-    width: 30px;
+    width: 40px;
     height: auto;
     cursor: pointer;
     margin-right: 5px;
@@ -70,7 +70,8 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3%;
+    padding: 5%;
+    font-family: "Formula1";
 }
 
 
@@ -83,15 +84,18 @@ header{
 }
 
 .filter-button{
-    border-radius: 5px;
+    border-radius: 20px;
     border-style: none;
-    padding: 5px;
+    padding: 12px;
     margin: 5px;
     cursor: pointer;
+    font-family: "Formula1";
+    background-color: var(--negro-carbon);
+    color: white;
 }
 
 .filter-button:hover{
-    background-color: black;
+    background-color: var(--rojo-formula);
     color: white;
 }
 
@@ -122,13 +126,15 @@ header{
 }
 
 .filtro-equipos-carrusel ul li .carrusel-equipos-icon{
-    width: 35px;
+    width: 36px;
     height: auto;
 }
 
 .filtro-equipos-carrusel ul li .carrusel-equipos-icon:hover{
     cursor: pointer;
 }
+
+
 
 /* ================= CATALOGO ================= */
 .catalogo{
@@ -162,7 +168,7 @@ header{
 .card-producto h5{
     font-size: large;
     word-wrap: break-word; /* Esto solo sirve si el contenedor tiene un ancho definido */
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-family: "Formula1";
     font-size: 15px;
     font-weight: 50;
@@ -178,7 +184,8 @@ header{
 
 .product-data-container p{
     font-size: larger;
-    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
     display: inline-block;
 }
 
@@ -213,4 +220,8 @@ header{
     cursor: pointer;
     background-color: var(--rojo-formula);
     color: white;
+}
+
+.product-counter{
+    margin-right : 5px;
 }

@@ -1,6 +1,11 @@
 /* ============================= Varibales ============================= */
-let carritoContainer = document.querySelector("#carrito-container");
+let carritoContainer = document.querySelector("#cart-list-container");
 let ticketButton = document.querySelector("#ticket-button")
+let headerImg = document.querySelector("#header-img");
+let cartAside = document.querySelector("#cart-aside");
+let ticketPrice = document.querySelector("#ticket-price");
+let emptyButton = document.querySelector("#empty-button");
+
 const url = "http://localhost:3000/api/products";
 let userData;
 
@@ -12,7 +17,44 @@ if(sessionStorage.getItem("userData")){ // User data
 }
 
 /* ============================= Funciones ============================= */
+headerImg.addEventListener("click", () => window.location.href = "index.html");
 ticketButton.addEventListener("click", imprimirTicket);
+emptyButton.addEventListener("click", vaciarCarrito);
+
+function mostrarCarrito(cantidades){
+    if(cantidades){
+        carritoContainer.innerHTML = "";
+        let acumuladorPrecio = 0;
+        let htmlProducto = `<ul class="cart-list">`
+
+        for(const [producto, cantidad] of cantidades){
+            //console.log(producto.nombre + " " + cantidad);
+            htmlProducto += `
+                <li class="cart-list-item"> 
+                    <img class="cart-img" src="http://localhost:3000/${producto.img_url}">
+                    <div class="cart-product-info">
+                        <p>${producto.nombre}</p>
+                        <p>Precio : $${producto.precio}</p>
+                        <p>Cantidad: ${cantidad}</p>
+                    </div>
+                    <div class="cart-controllers">
+                        <button onclick='agregarProductoCarrito("${producto.img_url}", "${producto.nombre}", ${producto.id}, ${producto.precio})' class="cart-button"> + </button>
+                        <button onclick='eliminarProductoCarrito(${producto.id})' class="cart-button"> - </button>
+                    </div>
+                </li>
+            `
+            acumuladorPrecio += producto.precio * cantidad
+        }
+        
+        htmlProducto += `</ul>`
+        carritoContainer.innerHTML += htmlProducto;
+        ticketPrice.innerHTML = `<h2 id="ticket-price">Total: $${acumuladorPrecio}</h2>`
+
+    }else{
+        carritoContainer.innerHTML = "";
+    }
+}
+
 
 async function imprimirTicket(){
     let idProductos = []; // Array donde se guardan los id de los productos en el carrito
@@ -58,9 +100,7 @@ async function imprimirTicket(){
 
 async function registrarVenta(precioTotal, idProductos){
     // Transformar la fecha a un formato que acepte la BD
-    const fecha = new Date()
-    .toLocaleString("sv-SE", { hour12: false })  
-    .replace("T", " ");
+    const fecha = new Date().toLocaleString("sv-SE", { hour12: false }).replace("T", " ");
 
     const data = {
         date : fecha, // Si en la BD genero este dato de manera automática no es necesario pasar esto
@@ -81,45 +121,18 @@ async function registrarVenta(precioTotal, idProductos){
 
     if(response.ok){
         alert(result.message);
-
         sessionStorage.removeItem("userData");
         sessionStorage.removeItem("carrito");
+
+
+
         window.location = "login.html";
     }else{
         alert(result.message);
-    }
-
-    //alert("Venta creada con éxito");
-    
+    }  
 }
 
-function mostrarCarrito(cantidades){
-    if(cantidades){
-        carritoContainer.innerHTML = "";
-        let acumuladorPrecio = 0;
-        let htmlProducto = `<ul class="cart-list">`
-        for(const [producto, cantidad] of cantidades){
-            //console.log(producto.nombre + " " + cantidad);
-            htmlProducto += `
-                <li class="cart-list-item"> 
-                    Nombre: ${producto.nombre} || Precio : ${producto.precio} || ${cantidad}
-                    <img class="cart-img" src="http://localhost:3000/${producto.img_url}">
-                    <button onclick='agregarProductoCarrito("${producto.img_url}", "${producto.nombre}", ${producto.id}, ${producto.precio})'> + </button>
-                    <button onclick='eliminarProductoCarrito(${producto.id})'> - </button>
-                </li>
-            `
-            acumuladorPrecio += producto.precio * cantidad
-        }
-        htmlProducto += `</ul>
-                         <div class="carrito-footer">
-                         <p> Total: ${acumuladorPrecio} </p>
-                         <button onclick='vaciarCarrito()'>Vaciar carrito</button>
-                         </div>`
-        carritoContainer.innerHTML += htmlProducto;
-    }else{
-        carritoContainer.innerHTML = "";
-    }
-}
+
 
 function obtenerProductos(){
     if(sessionStorage.getItem("carrito")){
@@ -166,14 +179,9 @@ function eliminarProductoCarrito(idProducto){
     let carritoActual = sessionStorage.getItem("carrito");
     if(carritoActual){
         let carrito = JSON.parse(carritoActual);
-        carrito.forEach(prod => {
-            console.log(prod.id + " " + idProducto);
-            console.log(prod.id === idProducto);
-        })
         let indice = carrito.findIndex(producto => producto.id === idProducto);
         console.log(indice);
         if(indice != -1){
-            console.log("hola puto");
             carrito.splice(indice, 1);
         }
         actualizarSSCarrito(carrito);
